@@ -1,0 +1,6 @@
+/Users/carlosposadas/CLionProjects/carloscsc656CP2/build/CMakeFiles/benchmark.dir
+/Users/carlosposadas/CLionProjects/carloscsc656CP2/build/CMakeFiles/sum_direct.dir
+/Users/carlosposadas/CLionProjects/carloscsc656CP2/build/CMakeFiles/sum_vector.dir
+/Users/carlosposadas/CLionProjects/carloscsc656CP2/build/CMakeFiles/sum_indirect.dir
+/Users/carlosposadas/CLionProjects/carloscsc656CP2/build/CMakeFiles/edit_cache.dir
+/Users/carlosposadas/CLionProjects/carloscsc656CP2/build/CMakeFiles/rebuild_cache.dir
