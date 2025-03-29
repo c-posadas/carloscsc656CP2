@@ -19,51 +19,48 @@ Assumptions: developed and tested using Python version 3.8.8 on macOS 11.6
 import pandas as pd
 import matplotlib.pyplot as plt
 
-
+# Load CSV data
 fname = "sample_data_3vars.csv"
 df = pd.read_csv(fname, comment="#")
 print(df)
 
+# Extract column names
 var_names = list(df.columns)
-
 print("var names =", var_names)
 
-# split the df into individual vars
-# assumption: column order - 0=problem size, 1=blas time, 2=basic time
-
+# Extract problem sizes and metric data
 problem_sizes = df[var_names[0]].values.tolist()
-code1_time = df[var_names[1]].values.tolist()
-code2_time = df[var_names[2]].values.tolist()
-code3_time = df[var_names[3]].values.tolist()
-
-plt.title("Comparison of 3 Codes")
+mflops = df[var_names[1]].values.tolist()       # MFLOP/s
+bandwidth = df[var_names[2]].values.tolist()    # Memory Bandwidth (%)
+latency = df[var_names[3]].values.tolist()      # Memory Latency (ns)
 
 xlocs = [i for i in range(len(problem_sizes))]
 
+# MFLOP/s Plot
+plt.title("MFLOP/s vs Problem Size")
 plt.xticks(xlocs, problem_sizes)
-
-# here, we are plotting the raw values read from the input .csv file, which
-# we interpret as being "time" that maps directly to the y-axis.
-#
-# what if we want to plot MFLOPS instead? How do we compute MFLOPS from
-# time and problem size? You may need to add some code here to compute
-# MFLOPS, then modify the plt.plot() lines below to plot MFLOPS rather than time.
-
-plt.plot(code1_time, "r-o")
-plt.plot(code2_time, "b-x")
-plt.plot(code3_time, "g-^")
-
-#plt.xscale("log")
-#plt.yscale("log")
-
+plt.plot(mflops, "r-o")
 plt.xlabel("Problem Sizes")
-plt.ylabel("runtime")
-
-varNames = [var_names[1], var_names[2], var_names[3]]
-plt.legend(varNames, loc="best")
-
+plt.ylabel("MFLOP/s")
 plt.grid(axis='both')
+plt.show()
 
+# Memory Bandwidth Utilization Plot
+plt.title("Memory Bandwidth Utilization")
+plt.xticks(xlocs, problem_sizes)
+plt.plot(bandwidth, "b-x")
+plt.xlabel("Problem Sizes")
+plt.ylabel("% Peak Bandwidth")
+plt.grid(axis='both')
+plt.show()
+
+# Memory Latency Plot
+plt.title("Memory Latency")
+plt.xticks(xlocs, problem_sizes)
+plt.plot(latency, "g-^")
+plt.xlabel("Problem Sizes")
+plt.ylabel("Latency (ns)")
+plt.grid(axis='both')
 plt.show()
 
 # EOF
